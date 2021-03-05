@@ -77,7 +77,7 @@ describe('/numbers', () => {
   });
 
   describe('POST /multiply', () => {
-    xit('multiplies two numbers', done => {
+    it('multiplies two numbers', done => {
       request(app)
         .post('/numbers/multiply')
         .send({ a: 10, b: 3 })
@@ -88,9 +88,9 @@ describe('/numbers', () => {
         });
     });
 
-    xit('multiplies stringified numbers', done => {
+    it('multiplies stringified numbers', done => {
       request(app)
-        .post('/numbers/multiply')
+        .post('/numbers/multiply/minusnumbers')
         .send({ a: '-4', b: '-9' })
         .then(res => {
           expect(res.status).toEqual(200);
@@ -113,7 +113,7 @@ describe('/numbers', () => {
     xit('errors if the parameters are not numbers', done => {
       request(app)
         .post('/numbers/multiply')
-        .send({ a: 'fish', b: 'chips' })
+        .send({ a2: 'fish', b2: 'chips' })
         .then(res => {
           expect(res.status).toEqual(400);
           expect(res.body).toEqual({ error: 'Parameters "a" and "b" must be valid numbers.' });
@@ -123,7 +123,7 @@ describe('/numbers', () => {
   });
 
   describe('POST /divide', () => {
-    xit('divides two numbers', done => {
+    it('divides two numbers', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: 162, b: 3 })
@@ -134,7 +134,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('divides stringified numbers', done => {
+    it('divides stringified numbers', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: '-4', b: '8' })
