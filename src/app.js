@@ -10,6 +10,11 @@ const { add, subtract, divide, multiply, remainder } = require('./lib/numbers');
 
 const { negate, truthiness, isOdd, startsWith  } = require('./lib/booleans');
 
+const { getNthElement, 
+        arrayToCSVString, 
+        addToArray2,  
+        elementsStartingWithAVowel, 
+        removeNthElement } = require('./lib/arrays');
 
 
 
@@ -32,7 +37,7 @@ app.get('/strings/first-characters/:string', (req, res) => {
 });
 
 /*app.get('/strings/first-characters/:id', (req, res) => {
-  res.status(200).json({ result: req.params.id.substring(0, req.query.q)})
+  res.status(200).json({ result: req.params.id.firstCharacters(3)})
 });*/
 
 
@@ -141,7 +146,6 @@ if(Number(b) === 0){
   });
 
   app.get('/booleans/:a/starts-with/:b', (req, res) => {
-    console.log(req.params.b)
     if(req.params.b.length !== 1 ) {
       res.status(400).json({ error: 'Parameter "character" must be a single character.' })
     } else {
@@ -150,6 +154,31 @@ if(Number(b) === 0){
   });
 
  
+//ARRAYS
+
+
+app.post('/arrays/element-at-index/:id', (req, res) => {
+  res.status(200).send({ result: getNthElement(req.params.id, req.body.array) });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+ res.status(200).send({ result: arrayToCSVString(req.body.array) });
+ 
+});
+
+app.post('/arrays/append', (req, res) => {
+ res.status(200).send({ result: addToArray2(req.body.value, req.body.array)})
+});
+
+app.post('/arrays/starts-with-vowel', (req, res) => {
+  res.status(200).send({ result: elementsStartingWithAVowel(req.body.array) });
+});
+
+/*app.post('/arrays/remove-element', (req, res)=> {
+  res.status(200).send({ result: removeNthElement(req.body.index, req.body.array) })
+
+}); */
+
 
 
 module.exports = app;
