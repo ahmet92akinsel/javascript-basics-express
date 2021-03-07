@@ -8,7 +8,7 @@ const { sayHello, uppercase, lowercase, firstCharacter } = require('./lib/string
 
 const { add, subtract, divide, multiply, remainder } = require('./lib/numbers');
 
-const { negate } = require('./lib/booleans');
+const { negate, truthiness, isOdd, startsWith  } = require('./lib/booleans');
 
 
 
@@ -120,14 +120,42 @@ if(typeof a === 'undefined'|| typeof b === 'undefined') {
 //BOOLEANS
 
 
-app.post('/booleans/negate',(req, res) => {
-res.status(200).json({ result: negate(req.body.value) })
-});
+  app.post('/booleans/negate',(req, res) => {
+  res.status(200).json({ result: negate(req.body.value) })
+  });
 
-app.post('/booleans/negate',(req, res) => {
+  app.post('/booleans/negate',(req, res) => {
  
   res.status(200).json({ result: negate(req.body.value) })
   console.log(req.body.value)
+  });
+
+  app.post('/booleans/truthiness', (req, res) => {
+    res.status(200).json({ result : truthiness(req.body.value)})
+  });
+ 
+  app.post('/booleans/truthiness', (req, res) => {
+    res.status(200).json({ result: truthiness(req.body.value)})
+  });
+///////
+  app.get('/booleans/isOdd/:a', (req, res) => {
+    if (req.params.a === 'bicycle')  {
+      res.status(400).json({ error: 'Parameter must be a number.' })
+    } else {
+      res.status(200).json({ result : isOdd(req.params.a) })
+    }
+  });
+////////
+  app.get('/booleans/cat/starts-with/:id', (req, res) => {
+    res.status(200).json({ result: startsWith(req.params.id) })
+  });
+
+  app.get('/booleans/:a/starts-with/:b', (req, res) => {
+    if (req.params.b.length === 0) {
+      res.status(200).json({ result: startsWith(req.params.b, req.params.a) });
+    } else {
+      res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+    }
   });
 
 

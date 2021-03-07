@@ -92,7 +92,7 @@ if (Number.isInteger(Math.sqrt(a))) {
 
 const startsWith = (char, string) => {
   
-  if (string.startsWith(char)) {
+  if (string.charAt(0) === char) {
     return true
   } else  {
     return false
