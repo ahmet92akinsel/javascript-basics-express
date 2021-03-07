@@ -90,7 +90,7 @@ if(typeof a === 'undefined'|| typeof b === 'undefined') {
 app.post('/numbers/divide', (req, res) => {
     
   const {a, b} = req.body
-  if (b === 0) {
+  if (Number(b) === 0) {
   res.status(400).json({ error: 'Unable to divide by 0.' });
  } else if (typeof a === 'undefined' || typeof b === 'undefined') {
   res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
@@ -103,16 +103,17 @@ app.post('/numbers/divide', (req, res) => {
 
 //remainder
 
-app.post('/number/remainder', (req, res) => {
+app.post('/numbers/remainder', (req, res) => {
 
 const {a, b} = req.body
-
-if(typeof a === 'undefined'|| typeof b === 'undefined') {
+if(Number(b) === 0){
+  res.status(400).json({ error: 'Unable to divide by 0.' })
+}else if(typeof a === 'undefined'|| typeof b === 'undefined') {
   res.status(400).json({ error: 'Parameters "a" and "b" are required.'})
 } else if (isNaN(a) === false && isNaN(b) === false) {
   res.status(200).json ({ result: remainder(a, b)})
 } else {
-  res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.'})
+  res.status(400).json({ error: 'Parameters must be valid numbers.' })
 }
 }); 
 
@@ -121,42 +122,34 @@ if(typeof a === 'undefined'|| typeof b === 'undefined') {
 
 
   app.post('/booleans/negate',(req, res) => {
-  res.status(200).json({ result: negate(req.body.value) })
-  });
-
-  app.post('/booleans/negate',(req, res) => {
- 
-  res.status(200).json({ result: negate(req.body.value) })
-  console.log(req.body.value)
+  res.status(200).json({ result: negate(Boolean(req.body.value)) })
   });
 
   app.post('/booleans/truthiness', (req, res) => {
     res.status(200).json({ result : truthiness(req.body.value)})
   });
  
-  app.post('/booleans/truthiness', (req, res) => {
-    res.status(200).json({ result: truthiness(req.body.value)})
-  });
-///////
-  app.get('/booleans/isOdd/:a', (req, res) => {
-    if (req.params.a === 'bicycle')  {
+ 
+
+  app.get('/booleans/is-odd/:a', (req, res) => {
+    if (isNaN(Number(req.params.a)))  {
       res.status(400).json({ error: 'Parameter must be a number.' })
     } else {
       res.status(200).json({ result : isOdd(req.params.a) })
+
     }
-  });
-////////
-  app.get('/booleans/cat/starts-with/:id', (req, res) => {
-    res.status(200).json({ result: startsWith(req.params.id) })
   });
 
   app.get('/booleans/:a/starts-with/:b', (req, res) => {
-    if (req.params.b.length === 0) {
-      res.status(200).json({ result: startsWith(req.params.b, req.params.a) });
+    console.log(req.params.b)
+    if(req.params.b.length !== 1 ) {
+      res.status(400).json({ error: 'Parameter "character" must be a single character.' })
     } else {
-      res.status(400).json({ error: 'Parameter "character" must be a single character.' });
-    }
+      res.status(200).json({ result: startsWith(req.params.b, req.params.a) })
+    }    
   });
+
+ 
 
 
 module.exports = app;
