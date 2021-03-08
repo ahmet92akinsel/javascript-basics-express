@@ -14,7 +14,8 @@ const { getNthElement,
         arrayToCSVString, 
         addToArray2,  
         elementsStartingWithAVowel, 
-        removeNthElement } = require('./lib/arrays');
+        removeNthElement,
+        removeNthElement2 } = require('./lib/arrays');
 
 
 
@@ -174,10 +175,11 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
   res.status(200).send({ result: elementsStartingWithAVowel(req.body.array) });
 });
 
-/*app.post('/arrays/remove-element', (req, res)=> {
+app.post('/arrays/remove-element', (req, res)=> {
+
   res.status(200).send({ result: removeNthElement(req.body.index, req.body.array) })
 
-}); */
+}); 
 
 
 

@@ -38,8 +38,9 @@ const addToArray2 = (element, array) => {
 };
 
 const removeNthElement = (index, array) => {
-  array.splice(index, 1);
-              
+ return array.splice(index, 1);
+
+ 
 };
 
 const numbersToStrings = numbers => {
@@ -92,9 +93,11 @@ const sumNumbers = numbers => {
   });
 };
 
-const sortByLastLetter = strings => {
+//const sortByLastLetter = strings => {
 //
-};
+//};
+
+
 
 module.exports = {
   getNthElement,
@@ -111,5 +114,6 @@ module.exports = {
   elementsStartingWithAVowel,
   removeSpaces,
   sumNumbers,
-  sortByLastLetter
+  //sortByLastLetter
+  
 };

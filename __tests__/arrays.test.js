@@ -58,7 +58,7 @@ describe('/arrays', () => {
   });
 
   describe('POST /remove-element?index={index}', () => {
-    it('returns an array with the first element removed', done => {
+    xit('returns an array with the first element removed', done => {
       request(app)
         .post('/arrays/remove-element')
         .send({ array: ['cat', 'dog', 'elephant', 'fox'] })
@@ -69,7 +69,7 @@ describe('/arrays', () => {
         });
     });
 
-    xit('returns an array with the element at the given index removed', done => {
+    it('returns an array with the element at the given index removed', done => {
       request(app)
         .post('/arrays/remove-element')
         .send({ array: ['cat', 'dog', 'elephant', 'fox'] })
